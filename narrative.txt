@@ -1,0 +1,11 @@
+Top short candidates (rule-based):
+- CMAX: MA10 < MA20, elevated vol
+- OPTX: MA10 < MA20, elevated vol
+- VLCN: MA10 < MA20, elevated vol
+- ICU: MA10 < MA20, elevated vol
+- BNED: MA10 < MA20, elevated vol
+- MLGO: overbought RSI, elevated vol
+- MEDS: overbought RSI, elevated vol
+- AISP: elevated vol
+- ZNTL: MA10 < MA20, elevated vol
+- BRFH: overbought RSI, elevated vol
