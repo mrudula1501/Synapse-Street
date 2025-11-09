@@ -111,9 +111,9 @@ Deployment Layer -	HuggingFace Spaces
 ```
 
 
-# Streamlit Link - https://public.tableau.com/views/Book1_17626741383510/Dashboard1?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link
+## Streamlit Link - https://public.tableau.com/views/Book1_17626741383510/Dashboard1?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link
 
-# Tableau Dashboard Link - https://public.tableau.com/views/Book1_17626741383510/Dashboard1?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link
+## Tableau Dashboard Link - https://public.tableau.com/views/Book1_17626741383510/Dashboard1?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link
 
 
 
