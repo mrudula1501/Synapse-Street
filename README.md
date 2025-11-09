@@ -117,8 +117,10 @@ Deployment Layer -	HuggingFace Spaces
 
 
 
-Developed By
+## Developed By :
+```
 Siddharth Adhikari
 Sathwick Kiran M S
 Kundan Satkar
-Mrudula Deshmukh 
+Mrudula Deshmukh
+```
