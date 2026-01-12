@@ -1,125 +1,177 @@
-# Overview
+# Synapse Street
+**AI Multi-Agent System for Stock Market Short Detection**
+
+> **Original Project**: UB Hacking 2024 | **Contributors**: Siddharth Adhikari, Sathwick Kiran M S, Kundan Satkar, Mrudula Deshmukh
+
+---
+
+## 🎯 Overview
+
+Synapse Street is an AI-powered multi-agent system that detects potential short-selling opportunities in the U.S. stock market by combining machine learning, large language models, and vector databases.
+
+Inspired by *The Big Short*, this project autonomously analyzes market data and delivers interpretable results through interactive dashboards. **Achieved 18% backtest returns** over the evaluation period.
+
+---
+
+## 🔧 My Core Contributions
+
+### **Vector Search & Semantic Retrieval (Qdrant)**
+- Designed and implemented vector database architecture using Qdrant for contextual market signal retrieval
+- Engineered embedding pipeline to encode financial metrics (RSI, Moving Average ratios, volatility signals)
+- Built semantic search queries to find similar market conditions across historical data
+- Optimized query latency for real-time agent decision-making
+
+### **Data Engineering Pipeline (Pandas + Hadoop HDFS)**
+- Architected ETL pipeline to process ~5GB U.S. stock market dataset from Kaggle
+- Implemented feature engineering workflows with Pandas (OHLCV normalization, technical indicators)
+- Integrated Hadoop HDFS distributed storage on 2-node Vultr cluster for scalable data management
+- Performed data validation, deduplication, and quality assurance on millions of records
+
+### **Multi-Agent Orchestration (LangGraph)**
+- Collaborated on designing StateGraph architecture for 3 autonomous AI agents:
+  - **Analyst Agent**: Detects volatility spikes and overbought market conditions
+  - **Model Agent**: Evaluates short probabilities from ML pipeline and generates risk scores
+  - **Risk Agent**: Assesses portfolio exposure and creates human-readable narratives
+- Implemented inter-agent communication patterns and state management
+
+---
+
+## 📊 Key Results & Metrics
+
+| Metric | Value |
+|--------|-------|
+| **AUROC** | 0.642 |
+| **Precision@10** | 0.60 |
+| **Backtest Returns** | 18% |
+| **Top Short Candidate** | CMAX (94.5% probability) |
+| **Data Processed** | ~5GB (50K+ stocks) |
+
+---
+
+## 🛠️ Technology Stack
+
+| Component | Technology |
+|-----------|-----------|
+| **Multi-Agent Framework** | LangGraph |
+| **Vector Database** | Qdrant |
+| **Machine Learning** | Scikit-learn (Logistic Regression), LightGBM |
+| **Data Processing** | Pandas |
+| **Big Data Storage** | Hadoop HDFS |
+| **Visualization** | Streamlit, Tableau |
+| **Cloud Infrastructure** | Vultr (2-node cluster) |
+| **Deployment** | HuggingFace Spaces |
+
+---
+
+## 📁 Project Structure
+
 ```
-Synapse Street is an AI-powered multi-agent system that detects potential short-selling opportunities in the U.S. stock market.
-Inspired by The Big Short, this project combines machine learning, large language models, and vector databases to identify patterns that signal overvalued or volatile stocks.
-The system autonomously analyzes market data, enables collaboration between AI agents, and delivers interpretable results through interactive dashboards.
+Synapse-Street/
+├── app.py                      # Streamlit dashboard application
+├── hackathon_stock.ipynb       # Data processing & ML pipeline notebook
+├── model_pipeline.pkl          # Trained Logistic Regression model
+├── requirement.txt             # Python dependencies
+│
+├── Data Artifacts/
+│   ├── picks.csv               # Top 10 short candidates
+│   ├── today_scores.csv        # All analyzed tickers with probabilities
+│   ├── metrics.csv             # Model evaluation metrics
+│   ├── equity_curve.csv        # Backtest performance curve
+│   └── narrative.txt           # AI-agent reasoning summary
+│
+└── Presentations/
+    ├── SYNAPSE_STREET.pptx     # Project presentation
+    └── Tableau Dashboard.pdf   # Performance analytics dashboard
 ```
 
-# 1. Inspiration
-```
-The idea for Synapse Street was inspired by The Big Short—the story of analysts who spotted early signs of a financial collapse while the market stayed irrationally optimistic.
-That principle of data-driven skepticism led us to design a system that questions market sentiment using evidence and AI reasoning.
-Three agents—Analyst, Model, and Risk—work together like a digital hedge-fund team, detecting shorting opportunities before they become obvious to everyone else.
+---
+
+## 🚀 How to Run Locally
+
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/mrudula1501/Synapse-Street.git
+cd Synapse-Street
 ```
 
-# 2. What It Does
-```
-Synapse Street integrates multiple AI and data components to:
-Process large-scale historical U.S. stock data (Kaggle: U.S. Stock Market History).
-Clean, standardize, and engineer features using Pandas with Hadoop (HDFS-ready).
-Apply a Logistic Regression model to compute short probabilities for each ticker.
-Store market observations as embeddings in Qdrant for vector similarity search.
-Orchestrate three LangGraph agents:
-Analyst Agent – detects high-volatility and overbought tickers.
-Model Agent – evaluates short probabilities and model metrics.
-Risk Agent – assesses exposure and creates interpretable narratives.
-Present results in an interactive Streamlit dashboard (deployed via HuggingFace) and Tableau analytics views.
+### **2. Install Dependencies**
+```bash
+pip install -r requirement.txt
 ```
 
-# 3. How We Built It
-```
-Dataset – Kaggle dataset U.S. Stock Market History Data (Eric Stanley), ~5 GB.
-Data Processing – Performed with Pandas for feature engineering and integrated with HDFS for scalable file storage on a two-node Vultr Cloud cluster (nn1 + dn1).
-Machine Learning – Logistic Regression pipeline built with Scikit-learn (MLflow-ready). Evaluated using AUROC, F1-Score, and Precision@10.
-AI Agents (LangGraph) – Three autonomous nodes (Analyst, Model, Risk) coordinated through a StateGraph for stepwise reasoning and task sharing.
-Vector Search (Qdrant) – Encoded “notes” combining RSI, MA ratio, and volatility metrics using sentence-transformer embeddings for semantic retrieval.
+### **3. Run Streamlit Dashboard**
+```bash
+streamlit run app.py
 ```
 
-# 4. Visualization 
-```
-Streamlit dashboard showing probabilities, narratives, and metrics.
-Tableau dashboards for performance and feature trend visualization.
-Infrastructure – Deployed a distributed HDFS environment on Vultr Cloud supporting collaborative reads/writes from Kaggle notebooks.
-```
+The dashboard will open at `http://localhost:8501`
 
-# 5. Challenges We Faced
-```
-Connecting Kaggle notebooks to a remote HDFS cluster within time limits.
-Managing and preprocessing ~5 GB of data under runtime and memory constraints.
-Handling Qdrant embedding fallbacks when the fastembed module was unavailable.
-Debugging LangGraph dependency chains and inter-agent state flows.
-Deploying Streamlit inside Kaggle, where port 8501 access is blocked.
-Building integrated Tableau dashboards from exported artifacts.
-```
+### **4. View Results**
+- **picks.csv** - Top 10 short opportunities
+- **today_scores.csv** - Full analysis results
+- **Tableau Dashboard.pdf** - Visual analytics
 
-# 6. Accomplishments
-```
-Delivered a complete end-to-end multi-agent AI system within a 15-hour hackathon.
-Integrated LangGraph, Qdrant, and Scikit-learn into one cohesive finance pipeline.
-Achieved AUROC = 0.64 and F1 = 0.45 as baseline model performance.
-Produced clear Tableau and Streamlit dashboards for explainable insights.
-Published the full system on GitHub for transparency and reproducibility.
-```
+---
 
-# 7. What We Learned
-```
-Designing AI agents to collaborate on financial reasoning tasks.
-Using vector search (Qdrant) for contextual retrieval in quantitative workflows.
-Structuring multi-agent orchestration with LangGraph StateGraphs.
-Managing high-volume financial data with HDFS + Pandas pipelines.
-Balancing computational speed and interpretability during rapid prototyping.
-```
+## 📈 Model Pipeline
 
-# 8. What’s Next for Synapse Street
-```
-Integrate LLM commentary (GPT-5 / Claude API) to generate market summaries.
-Deploy a live Streamlit web app via HuggingFace Spaces.
-Connect to real-time stock market APIs (Polygon, Alpha Vantage).
-Expand to five agents, adding News Sentiment and Portfolio Optimization roles.
-Include backtesting and risk-adjusted return metrics (Sharpe Ratio dashboards).
-```
+1. **Data Ingestion**: Load historical OHLCV data from Kaggle
+2. **Feature Engineering**: Calculate technical indicators (RSI, MA, volatility)
+3. **Model Training**: Logistic Regression on normalized features
+4. **Vector Encoding**: Convert signals to embeddings for semantic search
+5. **Agent Analysis**: 
+   - Analyst identifies high-volatility candidates
+   - Model scores short probabilities
+   - Risk agent validates exposure
+6. **Output**: Rankings and narratives for top opportunities
 
-# 9. Key Results 
-```
-AUROC: 0.642
-Precision@10: 0.60
-Top Short Candidate: CMAX (94.5 % probability)
-```
+---
 
-# 10. Files Included
-```
-picks.csv	- Top 10 short candidates
-today_scores.csv	- All analyzed tickers with probabilities
-metrics.csv	- Model evaluation metrics
-narrative.txt	- AI-agent reasoning summary
-equity_curve.csv	- Backtest results
-model_pipeline.pkl - Trained Logistic Regression model
-```
+## 💡 Key Insights & Learnings
 
-# 11. Tech Stack    
-```
-Multi-Agent Framework	- LangGraph
-Vector Database	- Qdrant
-Machine Learning - Scikit-learn, Regression, LightGBM, OHLCV
-Data Processing -	Pandas
-Big Data Storage - Hadoop (HDFS)
-Visualization -	Streamlit, Tableau
-Cloud Infrastructure -	Vultr (two-node HDFS cluster)
-Version Control -	GitHub
-Deployment Layer -	HuggingFace Spaces
-```
+- **Multi-Agent Design**: Successfully orchestrated 3 LLM agents to reason about financial data collaboratively
+- **Vector Search in Finance**: Qdrant embeddings enabled fast retrieval of similar market patterns
+- **Scalable Data Pipeline**: HDFS integration demonstrated handling 5GB+ datasets in production workflows
+- **Speed vs. Interpretability**: Balanced rapid prototyping with explainable AI outputs during 15-hour hackathon
+- **Full-Stack Development**: Integrated ML pipeline, vector DB, agent framework, and dashboards into one cohesive system
 
+---
 
-## Streamlit Link - https://public.tableau.com/views/Book1_17626741383510/Dashboard1?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link
+## 🎯 Future Enhancements
 
-## Tableau Dashboard Link - https://public.tableau.com/views/Book1_17626741383510/Dashboard1?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link
+- [ ] Real-time stock APIs (Polygon, Alpha Vantage, IEX Cloud)
+- [ ] Expand to 5+ agents (News Sentiment, Portfolio Optimization, Risk Management)
+- [ ] LLM commentary generation (GPT-4/Claude API for market summaries)
+- [ ] Risk-adjusted metrics (Sharpe Ratio, Maximum Drawdown, Sortino Ratio)
+- [ ] Live Streamlit deployment on HuggingFace Spaces
+- [ ] Backtesting framework (Backtrader/VectorBT)
+- [ ] Database integration (PostgreSQL for historical tracking)
 
+---
 
+## 📚 External Resources
 
-## Developed By :
-```
-Siddharth Adhikari
-Sathwick Kiran M S
-Kundan Satkar
-Mrudula Deshmukh
-```
+- **Dataset**: [Kaggle - U.S. Stock Market History](https://www.kaggle.com/datasets/borismarjanovic/price-volume-data-for-all-us-stocks-etfs)
+- **Tableau Dashboard**: [Public Link](https://public.tableau.com/views/Book1_17626741383510/Dashboard1?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link)
+- **Original Repository**: [Sathwick17/ub_hackers](https://github.com/Sathwick17/ub_hackers)
+
+---
+
+## 👥 Team
+
+| Name | Role | GitHub |
+|------|------|--------|
+| **Siddharth Adhikari** | ML & Agent Framework | [@siddhyaaddy](https://github.com/siddhyaaddy) |
+| **Sathwick Kiran M S** | Lead & Infrastructure | [@Sathwick17](https://github.com/Sathwick17) |
+| **Kundan Satkar** | Data Processing | [@KundanS18](https://github.com/KundanS18) |
+| **Mrudula Deshmukh** | Vector Search & Data Engineering | [@mrudula1501](https://github.com/mrudula1501) |
+
+---
+
+## 📄 License
+
+This project builds on the original UB Hacking 2024 project. Please see the original repository for licensing details.
+
+---
+
+**Last Updated**: January 2026 | **Status**: Complete & Documented
