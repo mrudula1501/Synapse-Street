@@ -293,9 +293,7 @@ Synapse-Street/
 
 > *"The multi-agent approach to financial analysis is genuinely novel. Most teams used single LLM calls; this team architected a collaborative system that mirrors real trading desks."* — Judges' Feedback
 
-**Team:** Mrudula Deshmukh (ML Engineer, Vector Search) · Teammate 1 (Frontend) · Teammate 2 (Data Engineering) · Teammate 3 (Strategy)
-
----
+**Team:** Team of 4 - Mrudula Deshmukh (ML Engineer, Vector Search).
 
 ## 📄 License
 
