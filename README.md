@@ -1,4 +1,4 @@
-# 🧠 Synapse Street — AI Multi-Agent Financial Analysis System
+# 🧠 Synapse Street - AI Multi-Agent Financial Analysis System
 
 [![Python](https://img.shields.io/badge/Python-3.9-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
 [![LangGraph](https://img.shields.io/badge/LangGraph-0.0.20-FF6F00?style=flat)](https://github.com/langchain-ai/langgraph)
@@ -17,9 +17,9 @@ AI-powered multi-agent system for stock market analysis. Three specialized GPT-4
 
 Traditional algorithmic trading systems suffer from three core failures:
 
-- **Single-point failure** — one model making all decisions
-- **Narrow context** — missing broader market signals
-- **Poor explainability** — black-box decisions traders can't trust
+- **Single-point failure** - one model making all decisions
+- **Narrow context** - missing broader market signals
+- **Poor explainability** - black-box decisions traders can't trust
 
 Synapse Street solves this with a collaborative multi-agent architecture that mirrors how real trading desks operate.
 
@@ -215,7 +215,7 @@ print(signals)
 
 ### Consensus Mechanism
 
-Not simple majority voting — we use weighted confidence scoring:
+Not simple majority voting - we use weighted confidence scoring:
 
 ```python
 def calculate_consensus(agent_outputs):
